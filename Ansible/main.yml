@@ -1,0 +1,14 @@
+---
+- name: Setup DVWA
+  import_playbook: pentest.yml
+
+- name: Install Elk Stack
+  import_playbook: install-elk.yml
+
+- name: Install Filebeat
+  import_playbook: filebeat-playbook.yml
+
+- name: Install Metricbeat
+  import_playbook: metricbeat-playbook.yml
+
+
