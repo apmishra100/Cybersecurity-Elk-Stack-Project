@@ -11,7 +11,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
   - [install-elk.yml](Ansible/install-elk.yml)
     - This playbook is used to install the ELK Server on the Elk-Server machine.
   - [filebeat-playbook.yml](Ansible/filebeat-playbook.yml)
-    - This playbok is used to install and configure Filebeat on the DVWA machines.
+    - This playbook is used to install and configure Filebeat on the DVWA machines.
   - [metricbeat-playbook.yml](Ansible/metricbeat-playbook.yml)   
     - This playbook is used to install and configure Metricbeat on the DVWA machines. 
 
@@ -30,12 +30,12 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 
 Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
 - What aspect of security do load balancers protect? What is the advantage of a jump box?
-  -  Load Balancing ensures availability to the servers. In case one out of the two servers we have set up unexpectdly goes down, the load balancer would be able to redirect traffic from the down server to the other available server to ensure availability. 
+  -  Load Balancing ensures availability to the servers. In case one out of the two servers we have set up unexpectedly goes down, the load balancer would be able to redirect traffic from the down server to the other available server to ensure availability. 
   -  For this network setup, I used a jump box. The jump box is used to facilitate administrative tasks to the other servers in the network. In this Elk Server set up, the jump box was used to set up the DVWA servers as well as the Elk-Server itself.   
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the files, logs and system metrics.
 - What does Filebeat watch for?
-  - Filebeat helps generate and organize log files to send to Logstash and Elasticsearch. Filebeat logs informations about the file system, including which files have changed. and when.  
+  - Filebeat helps generate and organize log files to send to Logstash and Elasticsearch. Filebeat logs information about the file system, including which files have changed. and when.  
 - What does Metricbeat record?
   -  Metricbeat collect metrics from your systems and services.  Metricbeat is a lightweight way to send system and service statistics to Elasticsearch. Logstash, and Kibana.
 
@@ -45,10 +45,10 @@ The configuration details of each machine may be found below.
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.7   | Linux            |
-| Web-1 | Webserver - Runs DVWA from a Docker Container | 10.0.0.7 | Linux |
-| Web-2 | Webserver - Runs DVWA from a Docker Container | 10.0.0.9 | Linux |
-| Elk-Server |  Server that runs the ELK Stack |  10.1.0.4 | Linux |
+| Jump Box | Gateway  | 10.0.0.7 (Dynamic Public IP)  | Linux            |
+| Web-1 | Webserver - Runs DVWA from a Docker Container | 10.0.0.7 (Static public IP of 52.165.24.192 from Load Balancer) | Linux |
+| Web-2 | Webserver - Runs DVWA from a Docker Container | 10.0.0.9 (Static public IP of 52.165.24.192 from Load Balancer) | Linux |
+| Elk-Server |  Server that runs the ELK Stack |  10.1.0.4 (Dynamic Public IP) | Linux |
 
 ### Access Policies
 
@@ -65,13 +65,13 @@ A summary of the access policies in place can be found in the table below.
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
 | Jump Box | No              | Home IP Address via SSH    |
-| Web-1    | No. Only accessible via SSH from Jump Box. | 10.0.0.7                     |
-| Web-2  | No. Only accessible via SSH from Jump Box   |  10.0.0.7                    |
-| Elk-Server  | No. Only accessible via SSH from Jump Box and TCP connections from Personal/Home IP Address on port 5601   |  10.1.0.4                    |
+| Web-1    | No. Only accessible via SSH from Jump Box. Front end available only for HTTP connection from Personal/Home IP Address | 10.0.0.7, Home IP address on Port 80 for TCP connections                      |
+| Web-2  | No. Only accessible via SSH from Jump Box. Front end available only for HTTP connection from Personal/Home IP Address   |  10.0.0.7, Home IP address on Port 80 for TCP connections                    |
+| Elk-Server  | No. Only accessible via SSH from Jump Box and TCP connections from Personal/Home IP Address on port 5601   |  10.1.0.4, Home IP address for TCP Connections over Port 5601                   |
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because we are able to make changes to multiple machines simultaneously, and ensure they are configured in the same way. Using Ansible to automate this configuration also means in the future, if we need to add/configure additional servers we have a ready made file that can be ran and a system can be brought up quickly, rather than spending time manually running commands and making configuration changes.
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because we are able to make changes to multiple machines simultaneously, and ensure they are configured in the same way. Using Ansible to automate this configuration also means in the future, if we need to add/configure additional servers we have a readymade file that can be ran and a system can be brought up quickly, rather than spending time manually running commands and making configuration changes.
 
 The playbook implements the following tasks:
 - Install.io docker and the pip module
@@ -92,7 +92,7 @@ We have installed the following Beats on these machines:
 - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- Filebeat logs informations about the file system, including which files have changed. A sample Filebeat output is shown below. We can see the different logs gnerated by different process running on the system getting picked up by Filebeat. 
+- Filebeat logs information about the file system, including which files have changed. A sample Filebeat output is shown below. We can see the logs gneerated by different process running on the system getting picked up by Filebeat. 
   ![filebeat_output](Diagrams/filebeat_output.png "Filebeat output")
   
 - Metricbeat collects system metrics such as CPU usage, Network IO, and Memory usage. An example output form the ELK Server is shown below. 
