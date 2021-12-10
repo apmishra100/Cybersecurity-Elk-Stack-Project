@@ -7,11 +7,11 @@ The files in this repository were used to configure the network depicted below.
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the [main.yml](Ansible/main.yml) file may be used to install only certain pieces of it, such as Filebeat.
 
   - [main.yml](Ansible/main.yml)
-    -This playbook is an overarching playbook that is used to run the following playbooks - pentest.yml, install-elk.yml, filebeat-playbook.yml, metricbeat-playbook.yml
+    - This playbook is an overarching playbook that is used to run the following playbooks - pentest.yml, install-elk.yml, filebeat-playbook.yml, metricbeat-playbook.yml
   - [pentest.yml](Ansible/pentest.yml)
     - This playbook is used to set up the Web VMs to run DVWA (D*mn Vulnerable Web App). 
   - [install-elk.yml](Ansible/install-elk.yml)
-    - This playbook is used to install the ELK Server on the Elk-Server machine.
+    - This playbook is used to install the ELK Stack on the Elk-Server machine.
   - [filebeat-playbook.yml](Ansible/filebeat-playbook.yml)
     - This playbook is used to install and configure Filebeat on the DVWA machines.
   - [metricbeat-playbook.yml](Ansible/metricbeat-playbook.yml)   
