@@ -47,10 +47,10 @@ The configuration details of each machine may be found below.
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.7 (Dynamic Public IP)  | Linux            |
-| Web-1 | Webserver - Runs DVWA from a Docker Container | 10.0.0.7 (Static public IP of 52.165.24.192 from Load Balancer) | Linux |
-| Web-2 | Webserver - Runs DVWA from a Docker Container | 10.0.0.9 (Static public IP of 52.165.24.192 from Load Balancer) | Linux |
-| Elk-Server |  Server that runs the ELK Stack |  10.1.0.4 (Dynamic Public IP) | Linux |
+| Jump Box | Gateway  | 10.0.0.7 (Dynamic Public IP)  | Linux (Ubuntu Server 18.04 LTS)           |
+| Web-1 | Webserver - Runs DVWA from a Docker Container | 10.0.0.7 (Static public IP of 52.165.24.192 from Load Balancer) | Linux (Ubuntu Server 18.04 LTS) |
+| Web-2 | Webserver - Runs DVWA from a Docker Container | 10.0.0.9 (Static public IP of 52.165.24.192 from Load Balancer) | Linux (Ubuntu Server 18.04 LTS) |
+| Elk-Server |  Server that runs the ELK Stack |  10.1.0.4 (Dynamic Public IP) | Linux (Ubuntu Server 18.04 LTS) |
 
 ### Access Policies
 
@@ -69,7 +69,7 @@ A summary of the access policies in place can be found in the table below.
 | Jump Box | No              | Home IP Address via SSH    |
 | Web-1    | No. Only accessible via SSH from Jump Box. Front end available only for HTTP connection from Personal/Home IP Address | 10.0.0.7, Home IP address on Port 80 for TCP connections                      |
 | Web-2  | No. Only accessible via SSH from Jump Box. Front end available only for HTTP connection from Personal/Home IP Address   |  10.0.0.7, Home IP address on Port 80 for TCP connections                    |
-| Elk-Server  | No. Only accessible via SSH from Jump Box and TCP connections from Personal/Home IP Address on port 5601   |  10.1.0.4, Home IP address for TCP Connections over Port 5601                   |
+| Elk-Server  | No. Only accessible via SSH from Jump Box and TCP connections from Personal/Home IP Address on port 5601   |  10.0.0.7, Home IP address for TCP Connections over Port 5601                   |
 
 ### Elk Configuration
 
