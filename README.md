@@ -100,7 +100,7 @@ These Beats allow us to collect the following information from each machine:
 - Metricbeat collects system metrics such as CPU usage, Network IO, and Memory usage. An example output form the ELK Server is shown below. 
   ![metricbeat_output](Diagrams/metricbeat_output.png "Metricbeat output")
 
-### Using the Playbook
+### Using the Playbook (Overview)
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
@@ -108,5 +108,17 @@ SSH into the control node and follow the steps below:
 - Update the hosts file in `/etc/ansible` to include an `elk` host group.
 - Run the playbook, and navigate to http://[Elk-Server_IP]:5601/app/kibana to check that the installation worked as expected.
 
-
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+### Using the Ansible Playbooks (Detailed Steps)
+Assuming the Web-1 and Web-2 are already set up and running the DVWA Docker containers and the Jump-Box has already installed docker and pulled the cyberxsecurity/ansible container
+1. SSH into Jump-Box from your allowed IP - `ssh RedAdmin@[Jumpbox-Public-IP]`
+2. Run `sudo docker container list -a` to determine the name of the cyberxsecurity/ansible docker container
+3. Run `sudo docker container start [Docker_Container_Name]` to start the docker container process
+4. Run `sudo docker attach [Docker_Container_Name]` to get a shell into the container.
+5. `cd /etc/ansible` to get into the ansible folder
+6. Modify the hosts file to create the elk host group.
+7. Create a new file for the [install-elk.yml](Ansible/install-elk.yml)
+8. Run `ansible-playbook install-elk.yml` to install the Elk stack on to the Elk host.
+9. To configure Filebeat create another file for [filebeat-playbook.yml](Ansible/filebeat-playbook.yml)
+10. Run `mkdir /etc/ansible/files/` and create a file in this directory for [filebeat-config.yml](Ansible/filebeat-config.yml). Be sure to update this file to point to the correct IP of the Elk Server in the hosts section for Kibana and the Elasticsearch sections.
+11. Run `ansible-playbook filebeat-playbook.yml` to install the configure the Filebeat for the Elk Server.
+12. Steps 9-11 can be repeated for Metricbeat setup. 
